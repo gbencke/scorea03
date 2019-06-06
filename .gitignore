@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# arquivos de saida
+# logreg_predicted.csv
+# xgboost_predicted.csv
