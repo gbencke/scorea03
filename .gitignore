@@ -107,4 +107,3 @@ venv.bak/
 logreg_predicted.csv
 xgboost_predicted.csv
 data/
-models/

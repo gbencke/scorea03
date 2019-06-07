@@ -33,6 +33,37 @@ def converte_publico(x):
         return "nao_definido"
     else:
         return x    
+
+consulta = """ SELECT DISTINCT 
+            '' as renda
+           ,CLI.cpf_cnpj
+           ,ca.numero2 as scorecontratante
+           ,CA.data2 as dataentrada
+           ,C.devolver as validadecampanha
+           ,CA.numero7 as atrasocongelado
+           ,CA.valor1 as valorcartacampanha
+           ,CA.valor10 as vlcusters
+           ,CA.TEXTO31 as status_boletagem
+           ,CA.TEXTO37 as data_status_boletagem
+           ,CA.valor12 as desconto
+           ,CA.texto8 as bandeira
+           ,CA.TEXTO25 as publico
+           ,CA.numero14 as matriz
+           ,'' as Pagamentos
+           ,'' as Acionamentos
+           ,'' as Valor_Pago
+            FROM CONTRATOS C
+            INNER JOIN DADOS_PESSOAIS AS D ON C.cod_cliente = D.cod_cliente
+            INNER JOIN CA_CONTRATOS CA ON C.cod_contrato = CA.cod_pai
+            INNER JOIN CLIENTES CLI ON C.cod_cliente = CLI.cod_cliente
+            INNER JOIN CONVENIOS CON ON CLI.cod_convenio = CON.cod_convenio
+            INNER JOIN TIPOS_STATUS TS ON C.cod_ts = TS.cod_ts
+            WHERE C.status_pagamento IN (1,2)
+            AND C.devolver >= CURRENT_DATE+1
+            AND CON.nome = 'ITAU CARTOES'
+            AND CA.TEXTO5 = 'A03' """
+
+string_conexao = "192.168.255.22,desenvolvimento,m@ndr4k3,mcob_bd03"
     
 # Importando modelos e escaladores
 xgboost_a03 = joblib.load(r'models\xgboosting_a03.pkl') 
