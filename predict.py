@@ -325,8 +325,9 @@ consulta = """ SELECT DISTINCT
             INNER JOIN CLIENTES CLI ON C.cod_cliente = CLI.cod_cliente
             INNER JOIN CONVENIOS CON ON CLI.cod_convenio = CON.cod_convenio
             INNER JOIN TIPOS_STATUS TS ON C.cod_ts = TS.cod_ts
-            WHERE C.status_pagamento IN (1,2)
-            AND C.devolver >= CURRENT_DATE+1
+            WHERE
+             -- C.status_pagamento IN (1,2) AND
+            C.devolver >= ('2019-05-29')
             AND CON.nome = 'ITAU CARTOES'
             AND CA.TEXTO5 = 'A03' """
 
