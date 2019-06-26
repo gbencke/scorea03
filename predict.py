@@ -3,6 +3,8 @@ import pickle
 import joblib
 import psycopg2
 import time
+from datetime import datetime
+
 
 def converte_loja(x):
     lojas = {'1788': 'VIVO ITAUCARD',
@@ -334,10 +336,10 @@ consulta = """ SELECT DISTINCT
 dadosConexao = "host='192.168.255.22' dbname='mcob_bd03' user='desenvolvimento' password='m@ndr4k3'"
 
 # Importando modelos e escaladores
-xgboost_a03 = joblib.load(r'models\xgboosting_a03.pkl') 
-escalador_vlrcartacampanha = joblib.load(r'models\scaler_vlrcartacampanha_a03.pkl') 
-escalador_vlrccluster = joblib.load(r'models\scaler_vlrcluster_a03.pkl')
-escalador_vlrdesconto = joblib.load(r'models\scaler_vlrdesconto_a03.pkl')
+xgboost_a03 = joblib.load(r'models/xgboosting_a03.pkl') 
+escalador_vlrcartacampanha = joblib.load(r'models/scaler_vlrcartacampanha_a03.pkl') 
+escalador_vlrccluster = joblib.load(r'models/scaler_vlrcluster_a03.pkl')
+escalador_vlrdesconto = joblib.load(r'models/scaler_vlrdesconto_a03.pkl')
 
 # Importando o dataset para prever (por enquanto csv, depois conectar em banco)
 #df = pd.read_csv(r"data\prever_novo.csv", encoding="latin1", delimiter=";", decimal = ",")
@@ -428,4 +430,6 @@ for i in cpf_prob:
     cursor_dw.execute("INSERT INTO desenv_itau_cartao.score_a03 values ('"+i[0]+"','"+str(i[1])+"')")
     conn_dw.commit()
 
-print("Insert execution time: " + str((time.time() - start_time)) + ' ms')
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+print(current_time + " - Insert execution time: " + str((time.time() - start_time)) + ' ms')
