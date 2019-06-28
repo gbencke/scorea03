@@ -1,1 +1,1 @@
-16:32:16 - Insert execution time: 67.2899820804596 ms
+09:32:24 - Insert execution time: 76.00352382659912 ms
