@@ -1,1 +1,4 @@
-14:32:41 - Insert execution time: 76.65902185440063 ms
+1    71357
+0     9221
+Name: tem_tel_no_bureau, dtype: int64
+11:33:33 - Insert execution time: 104.47871136665344 ms
